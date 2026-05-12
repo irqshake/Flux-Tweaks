@@ -5,7 +5,7 @@ ps_ret="$(ps -Ao pid,args)"
 change_task_cgroup()
 {
     for temp_pid in $(echo "$ps_ret" | grep "$1" | awk '{print $1}'); do
-        for temp_tid in $(ls "/proc/$temp_pid/task/"); do
+        for temp_tid in /proc/$temp_pid/task/*; do
             echo "$temp_tid" > "/dev/$3/$2/tasks"
         done
     done
