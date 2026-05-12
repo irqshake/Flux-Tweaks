@@ -1,5 +1,5 @@
 #!/system/bin/sh
-
+# Feel free to contact me if you have any suggestion or are not able to understand the reason behind some parameters.
 ps_ret="$(ps -Ao pid,args)"
 
 change_task_cgroup()
@@ -94,6 +94,21 @@ done
 
 # VM
 echo "60" > /proc/sys/vm/stat_interval
+echo "50" > /proc/sys/vm/vfs_cache_pressure
+echo 0 > /proc/sys/vm/compaction_proactiveness
+echo 0 > /proc/sys/vm/page_cluster
+echo 0 > /proc/sys/vm/oom_dump_tasks
+echo 1 > /proc/sys/vm/reap_mem_on_sigkill
+echo 1000 > /proc/sys/vm/dirty_expire_centisecs
+echo 1000 > /proc/sys/vm/dirty_writeback_centisecs
+echo 43200 > /proc/sys/vm/dirtytime_expire_seconds
+
+
+RAM_KB=$(grep MemTotal /proc/meminfo | awk '{print $2}')
+if [ $RAM_KB -gt 2038848 ]; then
+    echo "104857600" > /proc/sys/vm/dirty_background_bytes
+    echo "209715200" > /proc/sys/vm/dirty_bytes
+fi
 
 SCREEN_WIDTH=$(wm size | awk '/Physical/ {split($3,a,"x"); print a[1]}')
 if [ -f /proc/sys/vm/extra_free_kbytes ]; then
