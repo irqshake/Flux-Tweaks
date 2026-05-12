@@ -3,4 +3,5 @@ name=Actual Advanced Working Tweaks for Android
 version=v0.1
 versionCode=1
 author=Ringoshake
+updateJson=https://raw.githubusercontent.com/irqshake/Flux-Tweaks/refs/heads/update-release/update.json
 description=Only Tweaking Module you need for android.
