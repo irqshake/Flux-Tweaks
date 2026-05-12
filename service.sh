@@ -94,8 +94,7 @@ done
 
 # Frequency Governor { Comment this part if your SoC is armv8.5 }
 # Frequency invariant calculations is not supported on Socs less than armv8.5
-# The cpufreq driver reports a minimum transition latency of 1000us. If 2 cpufreq transitions takes place within this duration then they may cause stale data to schedutil. Therefore, set minimum 
-rate limit to 1ms.
+# The cpufreq driver reports a minimum transition latency of 1000us. If 2 cpufreq transitions takes place within this duration then they may cause stale data to schedutil. Therefore, set minimum rate limit to 1ms.
 # It is unlikely to affect performance as very rarely the gap between 2 cpufreq transitions is going to be less than 1 ms.
 
 for file in /sys/devices/system/cpu/cpufreq/policy*/schedutil/up_rate_limit_us; do
