@@ -92,6 +92,9 @@ for file in /sys/block/*/queue/iostats; do
     echo "0" > "$file"
 done
 
+# VM
+echo "60" > /proc/sys/vm/stat_interval
+
 # Frequency Governor { Comment this part if your SoC is armv8.5 }
 # Frequency invariant calculations is not supported on Socs less than armv8.5
 # The cpufreq driver reports a minimum transition latency of 1000us. If 2 cpufreq transitions takes place within this duration then they may cause stale data to schedutil. Therefore, set minimum rate limit to 1ms.
