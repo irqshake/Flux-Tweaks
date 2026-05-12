@@ -95,6 +95,19 @@ done
 # VM
 echo "60" > /proc/sys/vm/stat_interval
 
+SCREEN_WIDTH=$(wm size | awk '/Physical/ {split($3,a,"x"); print a[1]}')
+if [ -f /proc/sys/vm/extra_free_kbytes ]; then
+    if [ $SCREEN_WIDTH -gt 1080 ]; then
+        echo 102400 > /proc/sys/vm/extra_free_kbytes
+    else
+        echo 51200 > /proc/sys/vm/extra_free_kbytes
+    fi
+    echo 1 > /proc/sys/vm/watermark_scale_factor
+    echo 0 > /proc/sys/vm/watermark_boost_factor
+else
+    echo 15 > /proc/sys/vm/watermark_scale_factor
+fi
+
 # Frequency Governor { Comment this part if your SoC is armv8.5 }
 # Frequency invariant calculations are not supported on Socs less than armv8.5
 # The cpufreq driver reports a minimum transition latency of 1000us. If 2 cpufreq transitions takes place within this duration then they may cause stale data to schedutil. Therefore, set minimum rate limit to 1ms.
