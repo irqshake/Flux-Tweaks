@@ -80,3 +80,10 @@ change_task_cgroup "traced" "background" "cpuctl"
 change_task_cgroup "statsd" "background" "cpuctl"
 change_task_cgroup "f2fs_gc" "background" "cpuctl"
 change_task_cgroup "kgsl_low_prio" "background" "cpuctl"
+
+# Normal Kernel Tweaks {Already by default in flux kernel}
+# Network
+echo 1 > /proc/sys/net/ipv4/tcp_no_metrics_save
+echo 1 > /proc/sys/net/ipv4/tcp_low_latency
+echo 0 > /proc/sys/net/ipv4/tcp_timestamps
+
