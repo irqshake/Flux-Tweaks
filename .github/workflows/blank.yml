@@ -22,10 +22,13 @@ jobs:
         id: tag
         run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
       
-      - name: Archive repository
+      - name: Archive repository (excluding .github)
         run: |
-          # Create source archive of the current tag
-          git archive --format=zip --output=Flux-Tweaks-${{ steps.tag.outputs.TAG_NAME }}.zip ${{ steps.tag.outputs.TAG_NAME }}
+          # Create source archive without .github folder
+          git ls-tree -r --name-only ${{ steps.tag.outputs.TAG_NAME }} | \
+            grep -v '^\.github/' | \
+            git archive --format=zip --output=Flux-Tweaks-${{ steps.tag.outputs.TAG_NAME }}.zip \
+            ${{ steps.tag.outputs.TAG_NAME }}
       
       - name: Generate changelog
         id: changelog
