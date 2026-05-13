@@ -1,0 +1,48 @@
+name: Auto Release on Tag
+
+on:
+  push:
+    tags:
+      - 'v*' 
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Needed to create releases
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}  # Checkout the tag specifically
+          fetch-depth: 0
+      
+      - name: Get tag name
+        id: tag
+        run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+      
+      - name: Archive repository
+        run: |
+          # Create source archive of the current tag
+          git archive --format=zip --output=Flux-Tweaks-${{ steps.tag.outputs.TAG_NAME }}.zip ${{ steps.tag.outputs.TAG_NAME }}
+      
+      - name: Generate changelog
+        id: changelog
+        run: |    
+        
+          echo "[CHANGELOG.md](https://github.com/irqshake/Flux-Tweaks/blob/update-release/changelog.md)" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      
+      - name: Create Release and Upload Archives
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.tag.outputs.TAG_NAME }}
+          name: Release ${{ steps.tag.outputs.TAG_NAME }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          draft: false
+          prerelease: false
+          files: |
+            Flux-Tweaks-${{ steps.tag.outputs.TAG_NAME }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
