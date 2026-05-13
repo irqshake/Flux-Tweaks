@@ -25,11 +25,8 @@ jobs:
       - name: Archive repository (excluding .github)
         run: |
           # Create source archive without .github folder
-          git ls-tree -r --name-only ${{ steps.tag.outputs.TAG_NAME }} | \
-            grep -v '^\.github/' | \
-            grep -v '^README.md$' | \
             git archive --format=zip --output=Flux-Tweaks-${{ steps.tag.outputs.TAG_NAME }}.zip \
-            ${{ steps.tag.outputs.TAG_NAME }}
+            ${{ steps.tag.outputs.TAG_NAME }} --exclude='.github/*' --exclude='README.md'
       
       - name: Generate changelog
         id: changelog
