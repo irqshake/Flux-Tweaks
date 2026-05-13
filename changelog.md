@@ -11,3 +11,4 @@ v1.0:
 v1.1:
 1. Tune Scheduler Parameters
 2. Experimental Multiple Kswapd Spawning
+3. Set Renderer to SkiaGL[Ganesh] to prevent Bugs
