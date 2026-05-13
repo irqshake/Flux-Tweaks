@@ -1,1 +1,4 @@
 debug.graphics.game_default_frame_rate.disabled=false
+debug.hwui.renderer=skiagl
+debug.renderengine.backend=skiaglthreaded
+
