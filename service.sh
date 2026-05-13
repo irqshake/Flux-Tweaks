@@ -103,6 +103,8 @@ echo 1000 > /proc/sys/vm/dirty_expire_centisecs
 echo 1000 > /proc/sys/vm/dirty_writeback_centisecs
 echo 43200 > /proc/sys/vm/dirtytime_expire_seconds
 
+# [Experimental] Spawn 2 kswapd threads which can help in fast reclaiming of pages
+	echo 2 > /proc/sys/vm/kswapd_threads
 
 RAM_KB=$(grep MemTotal /proc/meminfo | awk '{print $2}')
 if [ $RAM_KB -gt 2038848 ]; then
@@ -122,6 +124,12 @@ if [ -f /proc/sys/vm/extra_free_kbytes ]; then
 else
     echo 15 > /proc/sys/vm/watermark_scale_factor
 fi
+
+# Scheduler
+echo 80 > /proc/sys/kernel/sched_min_task_util_for_boost
+echo 65 > /proc/sys/kernel/sched_min_task_util_for_colocation
+echo 85 > /proc/sys/kernel/sched_group_downmigrate
+echo 95 > /proc/sys/kernel/sched_group_upmigrate
 
 # Frequency Governor { Comment this part if your SoC is armv8.5 }
 # Frequency invariant calculations are not supported on Socs less than armv8.5
