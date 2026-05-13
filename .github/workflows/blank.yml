@@ -34,7 +34,7 @@ jobs:
         id: changelog
         run: |    
         
-          echo "Changelog=[CHANGELOG.md](https://github.com/irqshake/Flux-Tweaks/blob/update-release/changelog.md)" >> $GITHUB_OUTPUT
+          echo "Changelog=https://github.com/irqshake/Flux-Tweaks/blob/update-release/changelog.md" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
       
       - name: Create Release and Upload Archives
