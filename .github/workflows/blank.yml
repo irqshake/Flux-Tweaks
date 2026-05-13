@@ -26,7 +26,7 @@ jobs:
         run: |
           # Create source archive without .github folder
             git archive --format=zip --output=Flux-Tweaks-${{ steps.tag.outputs.TAG_NAME }}.zip \
-            ${{ steps.tag.outputs.TAG_NAME }} --exclude='.github/*' --exclude='README.md'
+            ${{ steps.tag.outputs.TAG_NAME }}
       
       - name: Generate changelog
         id: changelog
