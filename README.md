@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Android](https://img.shields.io/badge/Android-8.0%2B-brightgreen.svg)](https://www.android.com)
 
-Advanced Android system optimization script for improving UI performance, CPU scheduling, memory management, and battery efficiency. Designed for rooted Android devices with custom kernels.
+Advanced Android system optimization script for improving UI performance, CPU scheduling, memory management, and battery efficiency. Designed for rooted Android devices.
 
 ## 📋 Table of Contents
 
