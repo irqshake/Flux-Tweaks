@@ -7,3 +7,7 @@ v1.0:
 3. Networks and I/O Stats Removal for lower overhead
 4. Frequency Governor Tuning
 5. Disable "Disable default refresh rate" to prevent issues with unnecessary apps.
+
+v1.1:
+1. Tune Scheduler Parameters
+2. Experimental Multiple Kswapd Spawning
