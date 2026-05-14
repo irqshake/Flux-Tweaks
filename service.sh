@@ -148,3 +148,6 @@ for file in /sys/devices/system/cpu/cpufreq/policy*/schedutil/rate_limit_us; do
     echo "1000" > "$file"
 done
 
+
+# Temporary Workaround for the issues due to qgl config
+echo "" >> /data/vendor/gpu/qgl_config.txt
