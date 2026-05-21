@@ -86,6 +86,7 @@ change_task_cgroup "kgsl_low_prio" "background" "cpuctl"
 echo 1 > /proc/sys/net/ipv4/tcp_no_metrics_save
 echo 1 > /proc/sys/net/ipv4/tcp_low_latency
 echo 0 > /proc/sys/net/ipv4/tcp_timestamps
+echo 0 > /proc/sys/net/ipv4/tcp_fastopen_blackhole_timeout_sec
 
 # IO
 for file in /sys/block/*/queue/iostats; do
@@ -147,7 +148,3 @@ done
 for file in /sys/devices/system/cpu/cpufreq/policy*/schedutil/rate_limit_us; do
     echo "1000" > "$file"
 done
-
-
-# Temporary Workaround for the issues due to qgl config
-echo "" >> /data/vendor/gpu/qgl_config.txt
